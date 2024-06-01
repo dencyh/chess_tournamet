@@ -1,0 +1,15 @@
+[testing]
+score_update_delay = 20
+message_read_delay = 1
+waiting_for_names = true
+confirmed = false
+quick_start=false
+db = './score.txt'
+
+[quick_start]
+score_update_delay = 20
+message_read_delay = 1
+waiting_for_names = false
+confirmed = true
+quick_start=true
+db = './score.txt'
