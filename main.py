@@ -3,7 +3,6 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 from chess_tournament import ChessTournament
 from settings import settings
 from bot import handle_quick_start, start, handle_message
-import asyncio
 
 def main():
     log.basicConfig(
@@ -20,6 +19,7 @@ def main():
     # Messages
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
+    # Send initial message with current score on startup
     app.job_queue.run_once(callback=handle_quick_start, when=5, chat_id=settings.group_id)
     # Start polling
     app.run_polling(poll_interval=settings.message_read_delay)

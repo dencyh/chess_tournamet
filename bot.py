@@ -17,7 +17,7 @@ Client.request_config["headers"]["User-Agent"] = (
    "Contact me at dencyh@gmail.com"
 )
 
-ct = ChessTournament()
+ct = ChessTournament('2024-05-25T23:27:00+03:00')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ct.waiting_for_names = True
@@ -42,10 +42,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_quick_start(context: ContextTypes.DEFAULT_TYPE):
     if (not ct.started) and settings.quick_start:
+        response = ct.init_update()
         ct.started = True
-        asyncio.create_task(start_periodic_update(context.bot))
-        tag = "\n\nKickass begins... @gosssky"
-        response = f'{ct.get_score()}'
+        asyncio.create_task(start_periodic_update(context))
+        # tag = "\n\nKickass begins... @gosssky"
         await context.bot.send_message(text = response, chat_id=settings.group_id)
 
 async def start_periodic_update(context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -54,7 +54,7 @@ async def start_periodic_update(context: ContextTypes.DEFAULT_TYPE) -> None:
         response = ct.update_score()
         if (response != 'No new games'):
             await context.bot.send_message(text=response, chat_id=settings.group_id)
-            log.info(f'Response = {response}')
+        log.info(f'Response = {response}')
         await asyncio.sleep(settings.score_update_delay)
 
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

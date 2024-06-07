@@ -1,5 +1,5 @@
 def write_numbers_to_file(num1, num2, file_path):
-    with open(file_path, 'a') as file:  # 'a' mode for appending to the file
+    with open(file_path, 'w') as file:  # 'a' mode for appending to the file
         file.write(f"{num1} {num2}\n")  # Write numbers with a space and a newline
 
 def read_numbers_from_file(file_path):

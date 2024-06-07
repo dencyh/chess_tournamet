@@ -3,7 +3,13 @@
 # Ignore dynaconf secret files
 .secrets.*
 
+# output
 bot_pic.png
+games.xlsx
+memory_profile.log
 
+# python
 venv/
-res.json
+
+# vscode
+.vscode/
